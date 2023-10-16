@@ -114,7 +114,7 @@ void MainWindow::initActions(){
     group->addButton(_DrawRed);
     group->addButton(_DrawGreen);
     group->addButton(_DrawBlue);
-    _DrawWhite->setChecked(true);
+    _DrawBlack->setChecked(true);
 
     // add the action for the draw thickness
     //_DrawThicknessSlider = new QSlider(Qt::Horizontal, this);

@@ -8,7 +8,6 @@
 #include <QLabel>
 #include <iostream>
 #include <QMessageBox>
-#include <QtUiTools>
 
 void MainWindow::setThickness(int newThickness){
     _DrawCanvas->setThickness(newThickness);

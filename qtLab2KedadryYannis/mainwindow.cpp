@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <iostream>
 #include <QMessageBox>
+#include <QtUiTools>
 
 void MainWindow::setThickness(int newThickness){
     _DrawCanvas->setThickness(newThickness);
@@ -103,11 +104,12 @@ void MainWindow::initActions(){
     // add the actions for the draw color
     auto* group = new QButtonGroup(this);
     connect(group, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(setColor(QAbstractButton*)));
-    _DrawWhite = new QRadioButton(tr("WHITE"));
-    _DrawBlack = new QRadioButton(tr("BLACK"));
-    _DrawRed   = new QRadioButton(tr("RED"));
-    _DrawGreen = new QRadioButton(tr("GREEN"));
-    _DrawBlue  = new QRadioButton(tr("BLUE"));
+    //_DrawWhite = new QRadioButton(tr("WHITE"));
+    //_DrawBlack = new QRadioButton(tr("BLACK"));
+    //_DrawRed   = new QRadioButton(tr("RED"));
+    //_DrawGreen = new QRadioButton(tr("GREEN"));
+    //_DrawBlue  = new QRadioButton(tr("BLUE"));
+
     group->addButton(_DrawWhite);
     group->addButton(_DrawBlack);
     group->addButton(_DrawRed);
@@ -116,7 +118,8 @@ void MainWindow::initActions(){
     _DrawWhite->setChecked(true);
 
     // add the action for the draw thickness
-    _DrawThicknessSlider = new QSlider(Qt::Horizontal, this);
+    //_DrawThicknessSlider = new QSlider(Qt::Horizontal, this);
+
     _DrawThicknessSlider->setRange(1,20);
     _DrawThicknessSlider->setValue(2);
     connect(_DrawThicknessSlider, SIGNAL(valueChanged(int)), this, SLOT(setThickness(int)));
@@ -124,10 +127,11 @@ void MainWindow::initActions(){
     // add the actions for the draw style
     auto* groupStyle = new QButtonGroup(this);
     connect(groupStyle, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(setStyle(QAbstractButton*)));
-    _DrawLine        = new QRadioButton(tr("LINE"));
-    _DrawDashLine    = new QRadioButton(tr("DASH"));
-    _DrawDotLine     = new QRadioButton(tr("DOT"));
-    _DrawDashDotLine = new QRadioButton(tr("DASH_DOT"));
+    //_DrawLine        = new QRadioButton(tr("LINE"));
+    //_DrawDashLine    = new QRadioButton(tr("DASH"));
+    //_DrawDotLine     = new QRadioButton(tr("DOT"));
+    //_DrawDashDotLine = new QRadioButton(tr("DASH_DOT"));
+
     groupStyle->addButton(_DrawLine);
     groupStyle->addButton(_DrawDashLine);
     groupStyle->addButton(_DrawDotLine);
@@ -137,9 +141,10 @@ void MainWindow::initActions(){
     // add the actions for the draw shape
     auto* groupShape = new QButtonGroup(this);
     connect(groupShape, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(setShape(QAbstractButton*)));
-    _DrawLineShape      = new QRadioButton(tr("LINE"));
-    _DrawRectangleShape = new QRadioButton(tr("RECT"));
-    _DrawEllipseShape   = new QRadioButton(tr("ELLIPSE"));
+    //_DrawLineShape      = new QRadioButton(tr("LINE"));
+    //_DrawRectangleShape = new QRadioButton(tr("RECT"));
+    //_DrawEllipseShape   = new QRadioButton(tr("ELLIPSE"));
+
     groupShape->addButton(_DrawLineShape);
     groupShape->addButton(_DrawRectangleShape);
     groupShape->addButton(_DrawEllipseShape);
@@ -228,15 +233,32 @@ void MainWindow::createMenuBar(){
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow){
+
+    ui->setupUi(this);
+
     // create the status bar
     this->statusBar();
+
+    _DrawCanvas = findChild<DrawCanvas*>("drawingCanvas");
+
+    _DrawWhite = findChild<QRadioButton*>("radioButton_white");
+    _DrawBlack = findChild<QRadioButton*>("radioButton_black");
+    _DrawRed   = findChild<QRadioButton*>("radioButton_red");
+    _DrawGreen = findChild<QRadioButton*>("radioButton_green");
+    _DrawBlue  = findChild<QRadioButton*>("radioButton_blue");
+
+    _DrawThicknessSlider = findChild<QSlider*>("horizontalSlider_thick");
+
+    _DrawLine        = findChild<QRadioButton*>("radioButton_type_line");
+    _DrawDashLine    = findChild<QRadioButton*>("radioButton_type_dash");
+    _DrawDotLine     = findChild<QRadioButton*>("radioButton_type_dot");
+    _DrawDashDotLine = findChild<QRadioButton*>("radioButton_type_dashdot");
+
+    _DrawLineShape      = findChild<QRadioButton*>("radioButton_line");
+    _DrawRectangleShape = findChild<QRadioButton*>("radioButton_rectangle");
+    _DrawEllipseShape   = findChild<QRadioButton*>("radioButton_ellipse");
 
     initActions();
     createMenuBar();
     createToolBar();
-    createDrawToolBar();
-
-    // create a draw canvas
-    _DrawCanvas = new DrawCanvas(this);
-    _DrawCanvas->move(this->geometry().center());
 }

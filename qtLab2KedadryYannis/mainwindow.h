@@ -12,6 +12,7 @@
 #include <QCloseEvent>
 
 #include "drawCanvas.h"
+#include "ui_mainwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -51,7 +52,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    DrawCanvas* _DrawCanvas;
+    DrawCanvas* _DrawCanvas{};
     QAction* _FileOpen;
     QAction* _FileSave;
     QAction* _FileQuit;
@@ -59,19 +60,19 @@ private:
     QMenuBar* _Menubar;
     QToolBar* _Toolbar;
 
-    QRadioButton* _DrawWhite;
-    QRadioButton* _DrawBlack;
-    QRadioButton* _DrawRed;
-    QRadioButton* _DrawGreen;
-    QRadioButton* _DrawBlue;
-    QSlider* _DrawThicknessSlider;
-    QRadioButton* _DrawLine;
-    QRadioButton* _DrawDashLine;
-    QRadioButton* _DrawDashDotLine;
-    QRadioButton* _DrawDotLine;
-    QRadioButton* _DrawLineShape;
-    QRadioButton* _DrawRectangleShape;
-    QRadioButton* _DrawEllipseShape;
+    QRadioButton* _DrawWhite{};
+    QRadioButton* _DrawBlack{};
+    QRadioButton* _DrawRed{};
+    QRadioButton* _DrawGreen{};
+    QRadioButton* _DrawBlue{};
+    QSlider* _DrawThicknessSlider{};
+    QRadioButton* _DrawLine{};
+    QRadioButton* _DrawDashLine{};
+    QRadioButton* _DrawDashDotLine{};
+    QRadioButton* _DrawDotLine{};
+    QRadioButton* _DrawLineShape{};
+    QRadioButton* _DrawRectangleShape{};
+    QRadioButton* _DrawEllipseShape{};
 
     QString openFileDialog();
     void createToolBar();
